@@ -38,7 +38,7 @@ Cài đặt Docker Desktop trên máy [tại đây](https://www.docker.com/produ
 - Thiết lập cài đặt đảm bảo máy đã có docker:
 ![image](https://github.com/user-attachments/assets/f1213917-a15d-4f30-b5d2-f7774fbe9da9)
 - tạo thư mục mới
-  
+  ### Bước 1 setup
   ```
   mkdir kafka-docker
   cd kafka-docker
@@ -77,8 +77,52 @@ services:
     command: sleep infinity
 ```
 
-  - Tham khảo thêm [tại đây kafka](https://hub.docker.com/r/bitnami/kafka) [Spark](https://hub.docker.com/r/bitnami/spark)
+  - Tham khảo thêm tại đây - [ kafka](https://hub.docker.com/r/bitnami/kafka)  - [Spark](https://hub.docker.com/r/bitnami/spark)
   - Vì do chạy trên docker và spark cũng chạy trên docker nên chúng ta để `- KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092`
-  
+
+  - Chạy file docker-compose.yml bằng cách `docker-compose up -d` với -d là detach chạy nền (không hiển thị log ra terminal )
+### 2. Tạo topics 
+Tạo các topics riêng lẻ như các luồng dữ liệu khác nhau cho các nhiệm vụ khác nhau `code_create_topic.py`
+
+   ![image](https://github.com/user-attachments/assets/33dedf6f-ee1a-4a9e-b0ad-0cd23c9534f2)
+
+ * Với 3 Topics:
+    * Topics_1: Weather_Hà_Nội
+    * Topics_2: Weather_Hồ_Chí_Minh
+    * Topics_3: Weather_Đà_Nẵng
+ * Chạy file `python code_create_topics.py`
+### 3. Tạo producer
+Producer có nhiệm vụ là gửi dữ liệu thời tiết theo từng khu vực vào topic đã tạo bước 2 `code_create_producer.py`
+
+![image](https://github.com/user-attachments/assets/77503783-66c6-491b-bea1-2da322995a2e)
+
+gửi dữ liệu vào các topics bằng producer mỗi 30s gọi đến API 1 lần 
+Chạy file để đưa dữ liệu vào luồng dữ liệu topics 
+### 4. Tạo Consumer với Spark
+Kafka Consumer là một client application, subscribe một hoặc nhiều Kafka topics và đọc bản ghi theo thứ tự nó được tạo ra 
+Tạo file `code_create_consumer.py`
+
+![image](https://github.com/user-attachments/assets/416c0e37-4d13-4a01-bafd-e86024c4d805)
+
+![image](https://github.com/user-attachments/assets/e8173a89-161c-4917-a386-2ab00a05a5d0)
+
+với Consumer được tạo với Spark và được chạy trên Spark docker [tài liệu](https://hub.docker.com/r/bitnami/spark)
+
+File `code_create_consumer.py` được đẩy lên docker trong container spark
+![image](https://github.com/user-attachments/assets/9b3d7ad8-8d87-4c5f-ac9f-4c46ea6df335)
+![image](https://github.com/user-attachments/assets/78d1a9e9-6009-46ed-ba37-ce26db6e42cc)
+![image](https://github.com/user-attachments/assets/b5b3df51-4873-437e-aa07-63b632afd522)
+![image](https://github.com/user-attachments/assets/62757f79-c21a-4322-a02d-56fc7d1668fe)
+
+Log data
+![image](https://github.com/user-attachments/assets/86bc0558-6ca8-4566-a0fa-17dc1ee04ccb)
+
+### 5. Trực quan hóa
+![image](https://github.com/user-attachments/assets/11288d90-7b62-465f-9fec-acd0c04ebb5c)
+biểu đồ demo 
+![image](https://github.com/user-attachments/assets/39c23a1e-eb79-48d1-a217-5474d6799beb)
+
+
+
 
 
