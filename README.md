@@ -15,6 +15,7 @@ Dự án sử dụng Apache Kafka để thu thập dữ liệu thời tiết the
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) ( triển khai ) 
 - 
 ## Cấu trúc file 
+```
 weather-kafka-pipeline/
 │
 ├── producer/                # Gửi dữ liệu thời tiết đến Kafka
@@ -31,6 +32,7 @@ weather-kafka-pipeline/
 │
 ├── requirements.txt         # Thư viện cần cài
 └── README.md
+```
 ## ▶️ Hướng dẫn chạy
 Cài đặt Docker Desktop trên máy [tại đây](https://www.docker.com/products/docker-desktop/)
 - Thiết lập cài đặt đảm bảo máy đã có docker:
@@ -41,7 +43,7 @@ Cài đặt Docker Desktop trên máy [tại đây](https://www.docker.com/produ
   cd kafka-docker
   `
 - Tạo file `docker-compose.yml`
-  `
+  ```
 version: '3.8'
 services:
   kafka:
@@ -68,7 +70,7 @@ services:
       - ./spark_consumer.py:/app/spark_consumer.py
     working_dir: /app
     command: sleep infinity
-  `
+  ```
   - Tham khảo thêm [tại đây kafka](https://hub.docker.com/r/bitnami/kafka) [Spark](https://hub.docker.com/r/bitnami/spark)
   - Vì do chạy trên docker và spark cũng chạy trên docker nên chúng ta để `- KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092`
   - 
