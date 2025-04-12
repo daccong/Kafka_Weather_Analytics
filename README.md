@@ -41,7 +41,6 @@ Cài đặt Docker Desktop trên máy [tại đây](https://www.docker.com/produ
   
   ```
   mkdir kafka-docker
-  
   cd kafka-docker
   ```
   
