@@ -83,14 +83,14 @@ services:
   - Chạy file docker-compose.yml bằng cách `docker-compose up -d` với -d là detach chạy nền (không hiển thị log ra terminal )
 ### 2. Tạo topics 
 Tạo các topics riêng lẻ như các luồng dữ liệu khác nhau cho các nhiệm vụ khác nhau `code_create_topic.py`
-
-   ![image](https://github.com/user-attachments/assets/33dedf6f-ee1a-4a9e-b0ad-0cd23c9534f2)
-
  * Với 3 Topics:
     * Topics_1: Weather_Hà_Nội
     * Topics_2: Weather_Hồ_Chí_Minh
     * Topics_3: Weather_Đà_Nẵng
  * Chạy file `python code_create_topics.py`
+
+   ![image](https://github.com/user-attachments/assets/33dedf6f-ee1a-4a9e-b0ad-0cd23c9534f2)
+
 ### 3. Tạo producer
 Producer có nhiệm vụ là gửi dữ liệu thời tiết theo từng khu vực vào topic đã tạo bước 2 `code_create_producer.py`
 
