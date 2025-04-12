@@ -38,11 +38,13 @@ Cài đặt Docker Desktop trên máy [tại đây](https://www.docker.com/produ
 - Thiết lập cài đặt đảm bảo máy đã có docker:
 ![image](https://github.com/user-attachments/assets/f1213917-a15d-4f30-b5d2-f7774fbe9da9)
 - tạo thư mục mới
+  
   `
   mkdir kafka-docker
   
   cd kafka-docker
   `
+  
 - Tạo file `docker-compose.yml`
   
 ```
