@@ -43,36 +43,40 @@ Cài đặt Docker Desktop trên máy [tại đây](https://www.docker.com/produ
   cd kafka-docker
   `
 - Tạo file `docker-compose.yml`
-  ```
+  
+```
 version: '3.8'
+
 services:
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: bitnami/kafka:latest
     ports:
       - '9092:9092'
     environment:
       - KAFKA_CFG_NODE_ID=0
-      - KAFKA_CFG_PROCESS_ROLES=controller, broker
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_CFG_LISTENER_INTERFACES=PLAINTEXT://0.0.0.0:9092
-  spark :
+
+  spark:
     image: bitnami/spark:latest
     container_name: spark
     ports:
-      - "8080:8080"
+      - '8080:8080'
     environment:
       - SPARK_MODE=master
     volumes:
       - ./spark_consumer.py:/app/spark_consumer.py
     working_dir: /app
     command: sleep infinity
-  ```
+```
+
   - Tham khảo thêm [tại đây kafka](https://hub.docker.com/r/bitnami/kafka) [Spark](https://hub.docker.com/r/bitnami/spark)
   - Vì do chạy trên docker và spark cũng chạy trên docker nên chúng ta để `- KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092`
-  - 
+  
 
 
